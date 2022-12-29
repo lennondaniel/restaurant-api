@@ -6,11 +6,8 @@ export enum Category {
 }
 
 export interface MenuProps {
-    name: string;
+    dish_id: string;
     category: Category;
-    image: string;
-    description: string;
-    price: number
 }
 
 export class Menu {
