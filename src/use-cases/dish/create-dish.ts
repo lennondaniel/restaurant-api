@@ -12,11 +12,7 @@ interface CreateDishRequest {
 type CreateDishResponse = Dish;
 
 export class CreateDish {
-
-    constructor(
-        private dishRepository: DishRepository
-    ) {
-    }
+    constructor(private dishRepository: DishRepository) {}
     async execute({name, image, description, price}: CreateDishRequest): Promise<CreateDishResponse> {
         const overlappingDish = await this.dishRepository.findOverlapping(name);
 
