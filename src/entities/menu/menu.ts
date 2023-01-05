@@ -5,14 +5,11 @@ export enum Category {
     DRINKS = 'drinks'
 }
 
-export interface MenuProps {
-    dish_id: string;
-    category: Category;
-}
-
 export class Menu {
-    private props: MenuProps;
-    constructor(props: MenuProps) {
-        this.props = props
+    public dish_id: string;
+    public category: Category;
+    constructor(dish_id: string, category: Category) {
+        this.dish_id = dish_id;
+        this.category = category;
     }
 }
