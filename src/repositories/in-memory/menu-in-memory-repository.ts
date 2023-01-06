@@ -7,4 +7,10 @@ export class MenuInMemoryRepository implements MenuRepository {
     addDishToMenu(menu: Menu): Promise<void> {
         this.menu.push(menu)
     }
+    getAllMenu(): Promise<Menu[]> {
+        return new Promise(resolve =>  {
+            resolve(this.menu)
+        })
+
+    }
 }
