@@ -1,10 +1,9 @@
 import {MenuRepository} from "../../repositories/menu-repository";
 import {Menu} from "../../entities/menu/menu";
 
-export class GetAllMenu {
+export class RemoveDishToMenu {
     constructor(private menuRepository: MenuRepository) {}
-
-    execute(): Promise<Menu[]> {
-        return this.menuRepository.getAllMenu()
+    execute(dish_id: string): Promise<Menu[]>{
+        return this.menuRepository.removeDishToMenu(dish_id);
     }
 }
