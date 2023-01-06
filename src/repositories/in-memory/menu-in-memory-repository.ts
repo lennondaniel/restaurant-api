@@ -13,4 +13,12 @@ export class MenuInMemoryRepository implements MenuRepository {
         })
 
     }
+    removeDishToMenu(dish_id: string): Promise<Menu[]> {
+        return new Promise((resolve) => {
+            const menu = this.menu;
+            const dishIndex = menu.findIndex(menu => menu.dish_id === dish_id);
+            this.menu[dishIndex].deleted_at = new Date();
+            resolve(this.menu);
+        });
+    }
 }
