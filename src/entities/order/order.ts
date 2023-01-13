@@ -7,6 +7,10 @@ export interface OrderProps {
     start_at: Date;
     end_at?: Date;
 }
+export interface OrderFilter {
+    status?: boolean;
+    start_at?: Date;
+}
 export class Order {
     public id?: string;
     public table_number: number;
