@@ -27,7 +27,8 @@ describe('Create Order Dishes', () => {
 
         const order = await createOrder.execute( {
             table_number: 10,
-            start_at: new Date()
+            start_at: new Date(),
+            status: true
         });
         const orderDishesRepository = new OrderDishesInMemoryRepository()
         const createOrderDishes = new CreateOrderDishes(orderDishesRepository);
