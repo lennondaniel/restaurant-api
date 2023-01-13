@@ -10,7 +10,8 @@ describe('Create Order', () => {
 
         expect(createOrder.execute({
             table_number: 10,
-            start_at: new Date()
+            start_at: new Date(),
+            status: true
         })).resolves.toBeInstanceOf(Order);
     });
 
@@ -20,12 +21,14 @@ describe('Create Order', () => {
 
         await createOrder.execute({
             table_number: 10,
-            start_at: new Date()
+            start_at: new Date(),
+            status: true
         });
 
         expect(createOrder.execute({
             table_number: 10,
-            start_at: new Date()
+            start_at: new Date(),
+            status: true
         })).rejects.toBeInstanceOf(Error);
     });
 });

@@ -1,5 +1,5 @@
  import {OrderRepository} from "../order-repository";
-import {Order} from "../../entities/order/order";
+import {Order, OrderFilter} from "../../entities/order/order";
  import {Dish} from "../../entities/dish/dish";
 
 export class OrderInMemoryRepository implements OrderRepository {
@@ -22,4 +22,29 @@ export class OrderInMemoryRepository implements OrderRepository {
              resolve(order);
         });
     }
+
+    get(orderFilter: OrderFilter): Promise<Order[]> {
+
+        return new Promise((resolve) => {
+            if(orderFilter.status !== null || orderFilter.start_at !== null){
+                const orders = this.orders.filter(order => {
+                    if(orderFilter.status && !orderFilter.start_at){
+
+                        return order.status === orderFilter.status
+                    }
+                    if(!orderFilter.status && orderFilter.start_at){
+                        return order.start_at === orderFilter.start_at
+                    }
+                    if(orderFilter.status && orderFilter.start_at){
+                        return order.status === orderFilter.status && order.start_at === orderFilter.start_at
+                    }
+                });
+
+                resolve(orders)
+            }
+
+            resolve(this.orders);
+        });
+    }
+
 }

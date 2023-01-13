@@ -4,6 +4,7 @@ import {Order} from "../../entities/order/order";
 export interface OrderRequest {
     table_number: number;
     start_at: Date;
+    status: boolean;
 }
 export class CreateOrder {
     constructor(private orderRepository: OrderRepository) {}
