@@ -11,10 +11,10 @@ test('create a new menu option', () => {
         price: 30.00
     });
 
-    const menu = new Menu({
-        dish_id: dish.id,
-        category: Category.APPETIZER,
-    });
+    const menu = new Menu(
+        dish.id,
+        Category.APPETIZER,
+    );
 
     expect(menu).toBeInstanceOf(Menu);
     expect(dish).toBeInstanceOf(Dish);
