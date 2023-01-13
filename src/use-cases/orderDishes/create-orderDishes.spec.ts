@@ -6,6 +6,7 @@ import {OrderDishes} from "../../entities/orderDishes/orderDishes";
 import {DishInMemoryRepository} from "../../repositories/in-memory/dish-in-memory-repository";
 import {CreateDish} from "../dish/create-dish";
 import {CreateOrder} from "../order/create-order";
+import {CategoryDish} from "../../entities/dish/dish";
 
 describe('Create Order Dishes', () => {
     it('should be able to create an order dishes', async () => {
@@ -16,7 +17,9 @@ describe('Create Order Dishes', () => {
             name: 'Salada',
             image: 'imagem.jpg',
             description: 'teste',
-            price: 30.00
+            price: 30.00,
+            status: true,
+            category: CategoryDish.APPETIZER
         });
 
         const orderRepository = new OrderInMemoryRepository()
@@ -29,7 +32,9 @@ describe('Create Order Dishes', () => {
         const orderDishesRepository = new OrderDishesInMemoryRepository()
         const createOrderDishes = new CreateOrderDishes(orderDishesRepository);
 
-        expect(createOrderDishes.execute(order.id, dish.id))
-            .resolves.toBeInstanceOf(OrderDishes);
+        expect(createOrderDishes.execute({
+            order_id: order.id,
+            dish_id: dish.id
+        })).resolves.toBeInstanceOf(OrderDishes);
     });
 });

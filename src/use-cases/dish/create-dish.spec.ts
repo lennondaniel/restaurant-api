@@ -1,6 +1,6 @@
 import {describe, expect, it} from "vitest";
 import {CreateDish} from "./create-dish";
-import {Dish} from "../../entities/dish/dish";
+import {CategoryDish, Dish} from "../../entities/dish/dish";
 import {DishInMemoryRepository} from "../../repositories/in-memory/dish-in-memory-repository";
 
 describe('Create Dish', () => {
@@ -12,7 +12,9 @@ describe('Create Dish', () => {
             name: 'Salada',
             image: 'imagem.jpg',
             description: 'teste',
-            price: 30.00
+            price: 30.00,
+            status: true,
+            category: CategoryDish.DESSERT
         })).resolves.toBeInstanceOf(Dish);
     });
 
@@ -24,14 +26,18 @@ describe('Create Dish', () => {
             name: 'Salada',
             image: 'imagem.jpg',
             description: 'teste',
-            price: 30.00
+            price: 30.00,
+            status: true,
+            category: CategoryDish.DESSERT
         });
 
         expect(createDish.execute({
             name: 'Salada',
             image: 'imagem.jpg',
             description: 'teste',
-            price: 30.00
+            price: 30.00,
+            status: true,
+            category: CategoryDish.DESSERT
         })).rejects.toBeInstanceOf(Error);
     });
 });

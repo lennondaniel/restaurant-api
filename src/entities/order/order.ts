@@ -15,12 +15,9 @@ export class Order {
     public end_at?: Date;
 
     constructor(order: OrderProps) {
+        Object.assign(this, order);
         if (!order.id) {
             this.id = crypto.randomUUID();
         }
-        if (!order.status) {
-            this.status = true;
-        }
-        Object.assign(this, order);
     }
 }

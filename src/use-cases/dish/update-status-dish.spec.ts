@@ -1,9 +1,7 @@
 import {describe, expect, it} from "vitest";
 import {CreateDish} from "./create-dish";
-import {Dish} from "../../entities/dish/dish";
+import {CategoryDish, Dish} from "../../entities/dish/dish";
 import {DishInMemoryRepository} from "../../repositories/in-memory/dish-in-memory-repository";
-import {ShowDish} from "./show-dish";
-import {UpdateDish} from "./update-dish";
 import {UpdateStatusDish} from "./update-status-dish";
 
 describe('Update Dish', () => {
@@ -16,7 +14,9 @@ describe('Update Dish', () => {
             name: 'Salada',
             image: 'imagem.jpg',
             description: 'teste',
-            price: 30.00
+            price: 30.00,
+            status: true,
+            category: CategoryDish.APPETIZER
         });
 
         const dishUpdate = await updateStatusDish.execute(dish.id);
