@@ -14,5 +14,10 @@
     "@typescript-eslint/parser": "^5.47.1",
     "eslint": "^8.30.0",
     "vitest": "^0.26.2"
+  },
+  "dependencies": {
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.28.0"
   }
 }
