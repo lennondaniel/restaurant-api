@@ -47,4 +47,20 @@ export class OrderInMemoryRepository implements OrderRepository {
         });
     }
 
+    show(id: string): Promise<Order> {
+        return new Promise((resolve) => {
+            const order = this.orders.find(order => order.id === id);
+            resolve(order);
+        });
+    }
+
+    close(id: string): Promise<Order> {
+        return new Promise((resolve) => {
+            const orderIndex = this.orders.findIndex(order => order.id === id);
+            this.orders[orderIndex].status = false;
+            this.orders[orderIndex].end_at = new Date();
+            resolve(this.orders[orderIndex]);
+        });
+    }
+
 }
