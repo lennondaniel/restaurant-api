@@ -1,7 +1,6 @@
 import {beforeEach, describe, expect, it, vitest} from "vitest";
 import {CategoryDish, DishRequest, DishResponse} from "../../entities/dish/dish";
 import {IDishRepository} from "../../interfaces/repositories/dish-repository";
-import {FindDish} from "./find-dish";
 import {ShowDish} from "./show-dish";
 
 describe('Show Dish Use case', () => {

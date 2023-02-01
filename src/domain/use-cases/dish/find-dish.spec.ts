@@ -29,7 +29,7 @@ describe('Create Dish Use case', () => {
         mockDishRepository = new MockDishRepository();
     })
 
-    it('should find name dish', async () => {
+    it('should find name dishes', async () => {
         vitest.spyOn(mockDishRepository, "findDish").mockImplementation(() => Promise.resolve({
             id: '12345',
             name: 'Salada',

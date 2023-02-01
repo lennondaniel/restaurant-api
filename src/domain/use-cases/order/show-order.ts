@@ -1,15 +1,9 @@
-import {OrderRepository} from "../../interfaces/repositories/order-repository";
-import {Order} from "../../entities/order/order";
+import {IOrderRepository} from "../../interfaces/repositories/order-repository";
+import {OrderResponse} from "../../entities/order/order";
 
 export class ShowOrder {
-    constructor(private orderRepository: OrderRepository) {}
-    async execute(id: string): Promise<Order>{
-        const order = await this.orderRepository.show(id);
-
-        if(!order) {
-            throw new Error('not found order');
-        }
-
-        return order;
+    constructor(private orderRepository: IOrderRepository) {}
+    async execute(id: string): Promise<OrderResponse>{
+        return await this.orderRepository.showOrder(id);
     }
 }

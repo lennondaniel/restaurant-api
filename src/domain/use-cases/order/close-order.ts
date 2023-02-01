@@ -1,10 +1,10 @@
-import {OrderRepository} from "../../interfaces/repositories/order-repository";
-import {Order} from "../../entities/order/order";
+import {IOrderRepository} from "../../interfaces/repositories/order-repository";
+import {CloseOrderUseCase} from "../../interfaces/use-cases/orders/close-order-use-case";
 
-export class CloseOrder {
-    constructor(private orderRepository: OrderRepository) {}
+export class CloseOrder implements CloseOrderUseCase{
+    constructor(private orderRepository: IOrderRepository) {}
 
-    execute(id: string): Promise<Order> {
-        return this.orderRepository.close(id);
+    async execute(id: string) {
+        await this.orderRepository.closeOrder(id);
     }
 }

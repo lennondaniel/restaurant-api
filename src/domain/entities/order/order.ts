@@ -11,6 +11,18 @@ export interface OrderFilter {
     status?: boolean;
     start_at?: Date;
 }
+export interface OrderResponse {
+    id: string;
+    table_number: number;
+    status: boolean;
+    start_at: Date;
+    end_at: Date;
+}
+export interface OrderRequest {
+    table_number: number;
+    start_at: Date;
+    status: boolean;
+}
 export class Order {
     public id?: string;
     public table_number: number;
@@ -20,8 +32,5 @@ export class Order {
 
     constructor(order: OrderProps) {
         Object.assign(this, order);
-        if (!order.id) {
-            this.id = crypto.randomUUID();
-        }
     }
 }

@@ -1,5 +1,4 @@
 import {beforeEach, describe, expect, it, vitest} from "vitest";
-import {CreateDish} from "./create-dish";
 import {CategoryDish, DishRequest, DishResponse} from "../../entities/dish/dish";
 import {IDishRepository} from "../../interfaces/repositories/dish-repository";
 import {UpdateDish} from "./update-dish";
@@ -30,7 +29,7 @@ describe('Update Dish Use case', () => {
         mockDishRepository = new MockDishRepository();
     })
 
-    it('should update dish', async () => {
+    it('should update dishes', async () => {
         vitest.spyOn(mockDishRepository, "updateDish").mockImplementation(() => Promise.resolve(true))
         const updateDishUseCase = new UpdateDish(mockDishRepository)
         await updateDishUseCase.execute('12345', {

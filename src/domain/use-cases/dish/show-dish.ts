@@ -1,6 +1,5 @@
 import {DishResponse} from "../../entities/dish/dish";
-
-import {ShowDishUseCase} from "../../interfaces/use-cases/dish/show-dish-use-case";
+import {ShowDishUseCase} from "../../interfaces/use-cases/dishes/show-dish-use-case";
 import {IDishRepository} from "../../interfaces/repositories/dish-repository";
 
 export class ShowDish  implements ShowDishUseCase{

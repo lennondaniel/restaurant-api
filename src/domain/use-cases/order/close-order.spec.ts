@@ -1,25 +1,40 @@
-import {afterAll, describe, expect, it} from "vitest";
-import {OrderInMemoryRepository} from "../../domain/repositories/in-memory/order-in-memory-repository";
-import {CreateOrder} from "./create-order";
-import {Order} from "../../entities/order/order";
-import {GetOrders} from "./get-orders";
-import {ShowOrder} from "./show-order";
+
+import {beforeEach, describe, expect, it, vitest} from "vitest";
+import {IOrderRepository} from "../../interfaces/repositories/order-repository";
+import {OrderFilter, OrderResponse} from "../../entities/order/order";
 import {CloseOrder} from "./close-order";
 
-describe('Close Order', async () => {
-    it('should be able to show order', async () => {
-        const orderRepository = new OrderInMemoryRepository()
-        const createOrder = new CreateOrder(orderRepository);
-        const date = new Date()
-        const order = await createOrder.execute({
-            table_number: 10,
-            start_at: date,
-            status: true
-        });
+describe('Close Order Use case', () => {
+    class MockOrderRepository implements IOrderRepository {
+        closeOrder(id: string): void {
+            throw new Error('Method not implemented');
+        }
 
-        const closeOrder = new CloseOrder(orderRepository);
-        const closedOrder = await closeOrder.execute(order.id);
-        expect(closedOrder).toBeInstanceOf(Order)
-        expect(closedOrder.status).equal(false)
+        createOrder(order: OrderResponse): void {
+            throw new Error('Method not implemented');
+        }
+
+        getOrders(orderFilter: OrderFilter): Promise<OrderResponse[]> {
+            throw new Error('Method not implemented');
+        }
+
+        showOrder(id: string): Promise<OrderResponse> {
+            throw new Error('Method not implemented');
+        }
+    }
+
+    let mockOrderRepository: IOrderRepository
+
+    beforeEach(() => {
+        vitest.clearAllMocks();
+        mockOrderRepository = new MockOrderRepository();
+    })
+
+    it('should return true', async () => {
+        vitest.spyOn(mockOrderRepository, "closeOrder").mockImplementation(() => Promise.resolve(true))
+        const closeOrderUseCase = new CloseOrder(mockOrderRepository)
+        await closeOrderUseCase.execute('123456')
+
+        expect(mockOrderRepository.closeOrder).toHaveBeenCalledWith('123456');
     });
 });

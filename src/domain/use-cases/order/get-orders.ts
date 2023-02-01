@@ -1,9 +1,10 @@
-import {OrderRepository} from "../../interfaces/repositories/order-repository";
-import {Order, OrderFilter} from "../../entities/order/order";
+import {IOrderRepository} from "../../interfaces/repositories/order-repository";
+import {OrderFilter, OrderResponse} from "../../entities/order/order";
+import {GetOrdersUseCases} from "../../interfaces/use-cases/orders/get-orders-use-cases";
 
-export class GetOrders {
-    constructor(private orderRepository: OrderRepository) {}
-     execute(orderFilter: OrderFilter): Promise<Order[]> {
-        return this.orderRepository.get(orderFilter);
+export class GetOrders implements GetOrdersUseCases{
+    constructor(private orderRepository: IOrderRepository) {}
+     async execute(orderFilter: OrderFilter): Promise<OrderResponse[]> {
+        return await this.orderRepository.getOrders(orderFilter);
     }
 }

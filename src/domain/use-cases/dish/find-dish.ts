@@ -1,6 +1,5 @@
 import {DishResponse} from "../../entities/dish/dish";
-import {DishRepository} from "../../repositories/dish-repository";
-import {FindDishUseCase} from "../../interfaces/use-cases/dish/find-dish-use-case";
+import {FindDishUseCase} from "../../interfaces/use-cases/dishes/find-dish-use-case";
 import {IDishRepository} from "../../interfaces/repositories/dish-repository";
 
 export class FindDish implements FindDishUseCase{

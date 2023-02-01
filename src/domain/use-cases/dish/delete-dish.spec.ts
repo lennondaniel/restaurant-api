@@ -29,7 +29,7 @@ describe('Create Dish Use case', () => {
         mockDishRepository = new MockDishRepository();
     })
 
-    it('should delete dish', async () => {
+    it('should delete dishes', async () => {
         vitest.spyOn(mockDishRepository, "deleteDish").mockImplementation(() => Promise.resolve())
         const deleteDishUseCase = new DeleteDish(mockDishRepository)
         await deleteDishUseCase.execute('12345')

@@ -1,41 +1,30 @@
-import {describe, expect, it} from "vitest";
-import {OrderInMemoryRepository} from "../../domain/repositories/in-memory/order-in-memory-repository";
-import {OrderDishesInMemoryRepository} from "../../domain/repositories/in-memory/orderDishes-in-memory-repository";
+import {beforeEach, describe, expect, it, vitest} from "vitest";
+import {IOrderDishesRepository} from "../../interfaces/repositories/orderDishes-repository";
+import {OrderDishRequest} from "../../entities/orderDishes/orderDishes";
 import {CreateOrderDishes} from "./create-orderDishes";
-import {OrderDishes} from "../../entities/orderDishes/orderDishes";
-import {DishInMemoryRepository} from "../../domain/repositories/in-memory/dish-in-memory-repository";
-import {CreateDish} from "../dish/create-dish";
-import {CreateOrder} from "../order/create-order";
-import {CategoryDish} from "../../entities/dish/dish";
 
-describe('Create Order Dishes', () => {
-    it('should be able to create an order dishes', async () => {
-        const dishRepository = new DishInMemoryRepository()
-        const createDish = new CreateDish(dishRepository);
+describe('Create Order dish Use case', () => {
+    class MockOrderDishRepository implements IOrderDishesRepository {
+        createOrderDish(orderDish: OrderDishRequest) {
+            throw new Error('Method not implemented');
+        }
+    }
 
-        const dish = await createDish.execute({
-            name: 'Salada',
-            image: 'imagem.jpg',
-            description: 'teste',
-            price: 30.00,
-            status: true,
-            category: CategoryDish.APPETIZER
-        });
+    let mockOrderDishRepository: IOrderDishesRepository
 
-        const orderRepository = new OrderInMemoryRepository()
-        const createOrder = new CreateOrder(orderRepository);
+    beforeEach(() => {
+        vitest.clearAllMocks();
+        mockOrderDishRepository = new MockOrderDishRepository();
+    })
 
-        const order = await createOrder.execute( {
-            table_number: 10,
-            start_at: new Date(),
-            status: true
-        });
-        const orderDishesRepository = new OrderDishesInMemoryRepository()
-        const createOrderDishes = new CreateOrderDishes(orderDishesRepository);
+    it('should return true', async () => {
+        vitest.spyOn(mockOrderDishRepository, "createOrderDish").mockImplementation(() => Promise.resolve(true))
+        const createOrderDishUseCase = new CreateOrderDishes(mockOrderDishRepository)
+        await createOrderDishUseCase.execute({
+            order_id: '12345',
+            dish_id: '12345'
+        })
 
-        expect(createOrderDishes.execute({
-            order_id: order.id,
-            dish_id: dish.id
-        })).resolves.toBeInstanceOf(OrderDishes);
+        expect(mockOrderDishRepository.createOrderDish).toBeCalledTimes(1);
     });
 });

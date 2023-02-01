@@ -1,7 +1,7 @@
-import {DishRepository} from "../../repositories/dish-repository";
-import { Dish } from "../../entities/dish/dish";
-import DishModel from "../../infra/postgres/sequelize/models/dish-model";
-import {IRequestDish} from "../../interfaces/dish-interfaces";
+import {DishRepository} from "../../repositories/dishes-repository";
+import { Dish } from "../../entities/dishes/dishes";
+import DishModel from "../../infra/postgres/sequelize/models/dishes-model";
+import {IRequestDish} from "../../interfaces/dishes-interfaces";
 
 export class DishPostgresRepository implements DishRepository {
     async create({name, image, price, description, category}: IRequestDish) {

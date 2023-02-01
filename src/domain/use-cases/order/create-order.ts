@@ -1,26 +1,14 @@
-import {OrderRepository} from "../../interfaces/repositories/order-repository";
-import {Order} from "../../entities/order/order";
+import {IOrderRepository} from "../../interfaces/repositories/order-repository";
+import {Order, OrderRequest} from "../../entities/order/order";
+import {CreateOrderUseCase} from "../../interfaces/use-cases/orders/create-order-use-case";
 
-export interface OrderRequest {
-    table_number: number;
-    start_at: Date;
-    status: boolean;
-}
-export class CreateOrder {
-    constructor(private orderRepository: OrderRepository) {}
+export class CreateOrder implements CreateOrderUseCase {
+    constructor(private orderRepository: IOrderRepository) {}
 
-     async execute(orderRequest: OrderRequest): Promise<Order> {
-        const overlappingOrder = await this.orderRepository.findOverlapping(orderRequest.table_number)
+     async execute(orderRequest: OrderRequest) {
+        const order = new Order(orderRequest);
 
-         if(overlappingOrder){
-             throw new Error('A order with that table number already exists');
-         }
-
-         const order = new Order(orderRequest);
-
-        await this.orderRepository.create(order);
-        return order;
+        await this.orderRepository.createOrder(order);
 
     }
-
 }
