@@ -1,6 +1,5 @@
-import DishModel from "../../infra/data-source/postgres/sequelize/models/dish-model";
 import {IDishRepository} from "../interfaces/repositories/dish-repository";
-import {Dish, DishRequest, DishResponse} from "../entities/dish/dish";
+import {DishRequest, DishResponse} from "../entities/dish/dish";
 import {DishDataSource} from "../../infra/data-source/interfaces/dish-data-source";
 
 export class DishRepository implements IDishRepository {
