@@ -1,7 +1,7 @@
 import {OrderDishes} from "../../entities/orderDishes/orderDishes";
 import {OrderDishesRepository} from "../../repositories/orderDishes-repository";
 
-export class OrderDishesPostgresRepository implements OrderDishesRepository {
+export class OrderDishesPostgresDataSource implements OrderDishesRepository {
     public ordersDishes: OrderDishes[] = [];
     create(orderDishes: OrderDishes): Promise<OrderDishes> {
         return new Promise((resolve) => {
