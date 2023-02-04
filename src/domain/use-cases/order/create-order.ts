@@ -5,9 +5,7 @@ import {CreateOrderUseCase} from "../../interfaces/use-cases/orders/create-order
 export class CreateOrder implements CreateOrderUseCase {
     constructor(private orderRepository: IOrderRepository) {}
 
-     async execute(orderRequest: OrderRequest) {
-        const order = new Order(orderRequest);
-
+     async execute(order: OrderRequest) {
         await this.orderRepository.createOrder(order);
 
     }

@@ -4,7 +4,6 @@ import {OrderDishes, OrderDishRequest} from "../../entities/orderDishes/orderDis
 export class CreateOrderDishes {
     constructor(private orderDishesRepository: IOrderDishesRepository) {}
      async execute(orderDish: OrderDishRequest) {
-        const newOrderDish = new OrderDishes(orderDish);
-        await this.orderDishesRepository.createOrderDish(newOrderDish);
+        await this.orderDishesRepository.createOrderDish(orderDish);
     }
 }

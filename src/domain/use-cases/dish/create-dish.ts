@@ -4,9 +4,7 @@ import {IDishRepository} from "../../interfaces/repositories/dish-repository";
 
 export class CreateDish implements CreateDishUseCase{
     constructor(private dishRepository: IDishRepository) {}
-    async execute(createDish: DishRequest) {
-        const dish = new Dish(createDish);
-
+    async execute(dish: DishRequest) {
         await this.dishRepository.createDish(dish);
     }
 }
