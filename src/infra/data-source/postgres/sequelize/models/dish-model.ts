@@ -58,7 +58,8 @@ DishModel.init(
     }, {
         sequelize,
         modelName: 'DishModel',
-        tableName: 'dishes'
+        tableName: 'dishes',
+        timestamps: false
     }
 );
 
