@@ -1,10 +1,9 @@
-import {DishRepository} from "../../repositories/dishes-repository";
-import { Dish } from "../../entities/dishes/dishes";
-import DishModel from "../../infra/postgres/sequelize/models/dishes-model";
-import {IRequestDish} from "../../interfaces/dishes-interfaces";
+import {DishDataSource} from "../interfaces/dish-data-source";
+import {DishRequest, DishResponse} from "../../../domain/entities/dish/dish";
+import DishModel from "./sequelize/models/dish-model";
 
-export class DishPostgresRepository implements DishRepository {
-    async create({name, image, price, description, category}: IRequestDish) {
+export class DishPostgresDataSource implements DishDataSource {
+    async create({name, image, price, description, category}: DishRequest) {
         await DishModel.create({
             name: name,
             image: image,
@@ -13,15 +12,15 @@ export class DishPostgresRepository implements DishRepository {
             category: category
         });
     }
-    async findOverlapping(name: string, id: string = null): Promise<Dish | null> {
+    async find(name: string): Promise<DishResponse | null> {
         return await DishModel.findOne({where: {name: name}})
     }
 
-    async show(id: string): Promise<Dish> {
+    async show(id: string): Promise<DishResponse | null> {
         return await DishModel.findByPk(id);
     }
 
-    async update(id: string, {name, image, price, description, category}: IRequestDish) {
+    async update(id: string, {name, image, price, description, category}: DishRequest) {
         await DishModel.update(
             {
                 name: name,
@@ -30,21 +29,7 @@ export class DishPostgresRepository implements DishRepository {
                 description: description,
                 category: category
             }, {
-                where: {
-                    id: id
-                }
-            }
-        )
-    }
-
-    async updateStatus(id: string, status: boolean){
-        await DishModel.update(
-            {
-                status: status
-            }, {
-                where: {
-                    id: id
-                }
+                where: { id: id }
             }
         )
     }
