@@ -1,4 +1,4 @@
-import {Dish, DishRequest} from "../../entities/dish/dish";
+import {DishRequest} from "../../entities/dish/dish";
 import {CreateDishUseCase} from "../../interfaces/use-cases/dishes/create-dish-use-case";
 import {IDishRepository} from "../../interfaces/repositories/dish-repository";
 
